@@ -24,12 +24,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="0,10,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Grid.Column="1" Height="34" Width="147" Grid.Row="1" FontFamily="Arial" FontSize="14"/>
         <TextBox ToolTip="Логин или почта" x:Name="Login" HorizontalAlignment="Left" Height="44" Margin="8,85,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230" Grid.Column="2"/>
         <PasswordBox ToolTip="Пароль" x:Name="Password" HorizontalAlignment="Left" Margin="8,10,0,0" VerticalAlignment="Top" Width="230" Grid.Column="2" Height="44" Grid.Row="1"/>
-        <Image Margin="217,0,-10,0" Source="/Malina_Nizametdinova;component/Эмблема.png" Stretch="Fill" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="36,31,0,0" TextWrapping="Wrap" Text="Добро пожаловать в KiNGIT" VerticalAlignment="Top" Width="338" FontSize="22" FontFamily="Arial" FontWeight="Bold" Foreground="#FF7C3EA6" Grid.ColumnSpan="2" Height="25">
-            <TextBlock.Effect>
-                <DropShadowEffect Color="#FF80B4FF"/>
-            </TextBlock.Effect>
-        </TextBlock>
+        <Image Margin="237.8,0,-10.2,10.2" Source="/Malina_Nizametdinova;component/Эмблема.png" Stretch="Fill" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="36,31,0,0" TextWrapping="Wrap" Text="Добро пожаловать в KiNGIT" VerticalAlignment="Top" Width="338" FontSize="22" FontFamily="Arial" FontWeight="Bold" Foreground="Black" Grid.ColumnSpan="2" Height="25"/>
 
     </Grid>
 </Page>

@@ -32,18 +32,20 @@ namespace Malina_Nizametdinova.Pages
                 MessageBox.Show("Введите логин или пароль!!");
                 return;
             }
+
             using (var db = new Entities2())
             {
                 var user = db.Employees
                     .AsNoTracking()
-                    .FirstOrDefault(u => u.Login == Login.Text && u.Password == Password.Password);
+                    .FirstOrDefault(u => u.Login.ToUpper() == Login.Text.ToUpper() && u.Password == Password.Password);
+
                 if (user == null)
                 {
-                    MessageBox.Show("Пользователь с такими данными не найден!");
+                        MessageBox.Show("Пользователь с такими данными не найден!");        
                     return;
                 }
-                MessageBox.Show("Пользователь успешно найден!");
-                switch (user.Role)
+                   MessageBox.Show("Пользователь успешно найден!");
+                    switch (user.Role)
                 {
                     case "Администратор":
                         NavigationService?.Navigate(new Admin());
@@ -55,7 +57,7 @@ namespace Malina_Nizametdinova.Pages
                         NavigationService?.Navigate(new ManagerC());
                         break;
                 }
-            }
+            }          
         }
     }
 }

@@ -16,34 +16,24 @@ using System.Windows.Shapes;
 namespace Malina_Nizametdinova.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ManagerC.xaml
+    /// Логика взаимодействия для Pavilions.xaml
     /// </summary>
-    public partial class ManagerC : Page
+    public partial class Pavilions : Page
     {
-        public ManagerC()
+        public Pavilions()
         {
             InitializeComponent();
-            SC.ItemsSource = Entities2.GetContext().SC.ToList();
+            pavilions.ItemsSource = Entities2.GetContext().Pavilions.ToList();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddSC());
+
         }
 
         private void ButtonDel_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Pavilions());
         }
     }
 }
