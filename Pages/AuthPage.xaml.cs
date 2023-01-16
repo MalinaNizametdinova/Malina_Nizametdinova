@@ -32,7 +32,7 @@ namespace Malina_Nizametdinova.Pages
                 MessageBox.Show("Введите логин или пароль!!");
                 return;
             }
-            using (var db = new Entities())
+            using (var db = new Entities2())
             {
                 var user = db.Employees
                     .AsNoTracking()

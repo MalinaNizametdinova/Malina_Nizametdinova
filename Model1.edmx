@@ -254,7 +254,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="Pavilions" EntityType="Self.Pavilions" />
           <EntitySet Name="Rent" EntityType="Self.Rent" />
@@ -279,7 +279,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище KingIT_MalinaModelContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KingIT_MalinaModelContainer" CdmEntityContainer="Entities2">
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="KingIT_MalinaModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
