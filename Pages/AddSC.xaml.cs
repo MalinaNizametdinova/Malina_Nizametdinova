@@ -21,9 +21,13 @@ namespace Malina_Nizametdinova.Pages
     public partial class AddSC : Page
     {
         private SC _currentSC = new SC();
-        public AddSC()
+        public AddSC(SC selectedSC)
         {
             InitializeComponent();
+            if (selectedSC != null)
+            {
+                _currentSC = selectedSC;
+            }
             DataContext = _currentSC;
         }
 
@@ -34,19 +38,20 @@ namespace Malina_Nizametdinova.Pages
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentSC.ID == 0)
-                Entities2.GetContext().SC.Add(_currentSC);
-            try
-            {
-                Entities2.GetContext().SaveChanges();
-                MessageBox.Show("Данные успешно сохранены!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-            NavigationService.Navigate(new ManagerC());
-
+            
+                if (_currentSC.ID == 0) 
+                    Entities2.GetContext().SC.Add(_currentSC);
+                try
+                {
+                    Entities2.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно сохранены!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                NavigationService.Navigate(new ManagerC());
+            
         }
 
         private void CmbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -23,25 +23,26 @@ namespace Malina_Nizametdinova.Pages
         public ManagerC()
         {
             InitializeComponent();
-            SC.ItemsSource = Entities2.GetContext().SC.ToList();
+            DataSC.ItemsSource = Entities2.GetContext().SC.ToList();
         }
 
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e) // добавить
         {
-            NavigationService.Navigate(new AddSC());
+            NavigationService.Navigate(new AddSC(null));
         }
 
-        private void ButtonDel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonDel_Click(object sender, RoutedEventArgs e) // удаление
         {
             
+
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ButtonEdit_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.AddSC((sender as Button).DataContext as SC));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e) // список павильонов
         {
             NavigationService.Navigate(new Pavilions());
         }
