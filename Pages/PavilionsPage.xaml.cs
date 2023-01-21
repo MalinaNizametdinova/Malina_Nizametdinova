@@ -16,24 +16,29 @@ using System.Windows.Shapes;
 namespace Malina_Nizametdinova.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Pavilions.xaml
+    /// Логика взаимодействия для PavilionsPage.xaml
     /// </summary>
-    public partial class Pavilions : Page
+    public partial class PavilionsPage : Page
     {
-        public Pavilions()
+        public PavilionsPage()
         {
             InitializeComponent();
-            pavilions.ItemsSource = Entities2.GetContext().Pavilions.ToList();
+            PavilionsList.ItemsSource = Entities2.GetContext().Pavilions.ToList();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddPavilion(null));
         }
 
         private void ButtonDel_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ButtonEdit_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.AddPavilion((sender as Button).DataContext as Pavilions));
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Malina_Nizametdinova.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e) // список павильонов
         {
-            NavigationService.Navigate(new Pavilions());
+            NavigationService.Navigate(new PavilionsPage());
         }
     }
 }
