@@ -23,5 +23,23 @@ namespace Malina_Nizametdinova.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string s = "";
+            Random r = new Random();
+            for (int i = 0; i < 5; i++)
+                s += (char)(r.Next(1072, 1104));
+            Word.Text = s;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (Repeat.Text == Word.Text)
+            {
+                Close();
+            }
+            else Console.WriteLine("Попробуйте еще раз");
+        }
     }
 }

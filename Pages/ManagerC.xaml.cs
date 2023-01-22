@@ -33,7 +33,24 @@ namespace Malina_Nizametdinova.Pages
 
         private void ButtonDel_Click(object sender, RoutedEventArgs e) // удаление
         {
-            
+            var SCForRemoving = DataSC.SelectedItems.Cast<SC>().ToList();
+
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {SCForRemoving.Count()} элементов?", "Внимание",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+
+                try
+                {
+                  //  Entities2.GetContext().SC.RemoveRange(SCForRemoving);
+                    Entities2.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataSC.ItemsSource = Entities2.GetContext().SC.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
 
         }
 

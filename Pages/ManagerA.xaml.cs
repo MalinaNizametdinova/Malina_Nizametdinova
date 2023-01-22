@@ -23,6 +23,38 @@ namespace Malina_Nizametdinova.Pages
         public ManagerA()
         {
             InitializeComponent();
+            DataTen.ItemsSource = Entities2.GetContext().Tenants.ToList();
+        }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddTen(null));
+        }
+
+        private void ButtonDel_Click(object sender, RoutedEventArgs e)
+        {
+            var TenForRemoving = DataTen.SelectedItems.Cast<Tenants>().ToList();
+
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {TenForRemoving.Count()} элементов?", "Внимание",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+
+                try
+                {
+                    //  Entities2.GetContext().Tenants.RemoveRange(TenForRemoving);
+                    Entities2.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataTen.ItemsSource = Entities2.GetContext().Tenants.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+        }
+
+        private void ButtonEdit_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.AddTen((sender as Button).DataContext as Tenants));
         }
     }
 }

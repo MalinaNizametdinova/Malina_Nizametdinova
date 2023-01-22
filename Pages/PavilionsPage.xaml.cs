@@ -33,12 +33,55 @@ namespace Malina_Nizametdinova.Pages
 
         private void ButtonDel_Click(object sender, RoutedEventArgs e)
         {
+            using (var db = new Entities2())
+            {
+                var paw = db.Pavilions
+                    .AsNoTracking()
+                    .FirstOrDefault();
+                if (paw.Status == "Забронировано" || paw.Status == "Арендован")
+                {
+                    Console.WriteLine("Действие невозможно");
+                }
+                else
+                {
+
+                }
+                var PavForRemoving = PavilionsList.SelectedItems.Cast<Pavilions>().ToList();
+
+                if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {PavForRemoving.Count()} элементов?", "Внимание",
+                                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    try
+                    {
+                        // Entities2.GetContext().Pavilions.RemoveRange(PavForRemoving);
+                        Entities2.GetContext().SaveChanges();
+                        MessageBox.Show("Данные успешно удалены!");
+
+                        PavilionsList.ItemsSource = Entities2.GetContext().Pavilions.ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+            }
 
         }
 
         private void ButtonEdit_Click_1(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Pages.AddPavilion((sender as Button).DataContext as Pavilions));
+            using (var db = new Entities2())
+            {
+                var paw = db.Pavilions
+                    .AsNoTracking()
+                    .FirstOrDefault();
+                if (paw.Status == "Забронировано" || paw.Status == "Арендован")
+                {
+                    Console.WriteLine("Действие невозможно");
+                }
+                else
+                {
+                    NavigationService.Navigate(new Pages.AddPavilion((sender as Button).DataContext as Pavilions));
+                }
+            }
         }
     }
 }

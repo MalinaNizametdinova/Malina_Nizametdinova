@@ -88,11 +88,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddEmp.xaml.cs">
+      <DependentUpon>AddEmp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddPavilion.xaml.cs">
       <DependentUpon>AddPavilion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddSC.xaml.cs">
       <DependentUpon>AddSC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddTen.xaml.cs">
+      <DependentUpon>AddTen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Admin.xaml.cs">
       <DependentUpon>Admin.xaml</DependentUpon>
@@ -140,11 +146,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddPavilion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AddSC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddTen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

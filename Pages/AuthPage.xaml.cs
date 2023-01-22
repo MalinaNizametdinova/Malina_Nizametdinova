@@ -24,7 +24,7 @@ namespace Malina_Nizametdinova.Pages
         {
             InitializeComponent();
         }
-
+        static int s = 0;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrEmpty(Login.Text) || string.IsNullOrEmpty(Password.Password))
@@ -38,13 +38,19 @@ namespace Malina_Nizametdinova.Pages
                 var user = db.Employees
                     .AsNoTracking()
                     .FirstOrDefault(u => u.Login.ToUpper() == Login.Text.ToUpper() && u.Password == Password.Password);
-
                 if (user == null)
                 {
-                        MessageBox.Show("Пользователь с такими данными не найден!");        
+                    s++;
+                    MessageBox.Show("Пользователь с такими данными не найден!");
                     return;
+                }            
+                
+                if (s==3)
+                {
+                    NavigationService.Navigate(new Captcha());
                 }
-                   MessageBox.Show("Пользователь успешно найден!");
+
+                MessageBox.Show("Пользователь успешно найден!");
                     switch (user.Role)
                 {
                     case "Администратор":
