@@ -89,5 +89,10 @@ namespace Malina_Nizametdinova.Pages
             }
             NavigationService.Navigate(new Admin());
         }
+
+        private void Number_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

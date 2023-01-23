@@ -52,7 +52,7 @@ namespace Malina_Nizametdinova.Pages
                                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     try
                     {
-                        // Entities2.GetContext().Pavilions.RemoveRange(PavForRemoving);
+                        //Entities2.GetContext().Pavilions.RemoveRange(PavForRemoving);
                         Entities2.GetContext().SaveChanges();
                         MessageBox.Show("Данные успешно удалены!");
 

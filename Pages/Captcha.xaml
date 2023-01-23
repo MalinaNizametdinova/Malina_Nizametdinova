@@ -9,7 +9,7 @@
     <Grid>
         <Label Content="Повторите слово ниже" HorizontalAlignment="Left" Margin="93,64,0,0" VerticalAlignment="Top" Height="48" Width="248" FontSize="16"/>
         <Button Content="Показать" HorizontalAlignment="Left" Margin="93,112,0,0" VerticalAlignment="Top" Width="248" Click="Button_Click"/>
-        <TextBox x:Name="Word" HorizontalAlignment="Left" Margin="93,175,0,0" VerticalAlignment="Top" Width="248" Height="59" FontSize="24"/>
+        <TextBox x:Name="Word" IsReadOnly="True" HorizontalAlignment="Left" Margin="93,175,0,0" VerticalAlignment="Top" Width="248" Height="59" FontSize="24"/>
         <TextBox x:Name="Repeat" HorizontalAlignment="Left" Height="67" Margin="93,239,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="93,311,0,0" VerticalAlignment="Top" Width="248" Click="Button_Click_1"/>
 

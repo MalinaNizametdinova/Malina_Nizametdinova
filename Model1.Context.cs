@@ -20,6 +20,11 @@ namespace Malina_Nizametdinova
             : base("name=Entities2")
         {
         }
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
         public static Entities2 GetContext()
         {
             if (_context == null)
@@ -27,15 +32,17 @@ namespace Malina_Nizametdinova
             return _context;
         }
     
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Pavilions> Pavilions { get; set; }
         public DbSet<Rent> Rent { get; set; }
         public DbSet<SC> SC { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Tenants> Tenants { get; set; }
+        public DbSet<Status> Status { get; set; }
+
+        internal object Where(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

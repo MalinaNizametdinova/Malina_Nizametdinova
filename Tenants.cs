@@ -26,5 +26,6 @@ namespace Malina_Nizametdinova
         public string Adress { get; set; }
     
         public virtual ICollection<Rent> Rent { get; set; }
+        public virtual Rent Rent1 { get; set; }
     }
 }

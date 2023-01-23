@@ -41,14 +41,16 @@ namespace Malina_Nizametdinova.Pages
                 if (user == null)
                 {
                     s++;
-                    MessageBox.Show("Пользователь с такими данными не найден!");
+                    MessageBox.Show("Пользователь с такими данными не найден!");                    
+                    if (s >= 3)
+                    {
+                        Captcha capt = new Captcha();
+                        capt.Show();
+                    }
                     return;
                 }            
                 
-                if (s==3)
-                {
-                    NavigationService.Navigate(new Captcha());
-                }
+           
 
                 MessageBox.Show("Пользователь успешно найден!");
                     switch (user.Role)
@@ -63,7 +65,7 @@ namespace Malina_Nizametdinova.Pages
                         NavigationService?.Navigate(new ManagerC());
                         break;
                 }
-            }          
+            }
         }
     }
 }

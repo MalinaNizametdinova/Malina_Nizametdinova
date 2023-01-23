@@ -20,10 +20,13 @@ namespace Malina_Nizametdinova.Pages
     /// </summary>
     public partial class ManagerC : Page
     {
+        private Entities2 _context = new Entities2();
         public ManagerC()
         {
             InitializeComponent();
             DataSC.ItemsSource = Entities2.GetContext().SC.ToList();
+           
+            Update();          
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e) // добавить
@@ -40,7 +43,7 @@ namespace Malina_Nizametdinova.Pages
 
                 try
                 {
-                  //  Entities2.GetContext().SC.RemoveRange(SCForRemoving);
+                    //  Entities2.GetContext().SC.RemoveRange(SCForRemoving);
                     Entities2.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
 
@@ -62,6 +65,37 @@ namespace Malina_Nizametdinova.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e) // список павильонов
         {
             NavigationService.Navigate(new PavilionsPage());
+        }
+            
+        private void Update()
+        {
+            var currentRe = Entities2.GetContext().SC.ToList();
+            
+
+            if (Goroda.Text != null)
+            {
+                currentRe = currentRe.Where(x => x.City.ToLower().Contains(Goroda.Text.ToLower())).ToList();
+                DataSC.ItemsSource = currentRe.ToList();
+            }
+
+            if (txtStatus.Text != null)
+            {
+                currentRe = currentRe.Where(x => x.Status.ToLower().Contains(txtStatus.Text.ToLower())).ToList();
+                DataSC.ItemsSource = currentRe.ToList();
+            }
+
+        }
+        
+
+
+        private void Goroda_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void Status_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
         }
     }
 }

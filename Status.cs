@@ -12,24 +12,9 @@ namespace Malina_Nizametdinova
     using System;
     using System.Collections.Generic;
     
-    public partial class Rent
+    public partial class Status
     {
-        public Rent()
-        {
-            this.Tenants1 = new HashSet<Tenants>();
-        }
-    
-        public int ID { get; set; }
-        public int ID_Tenant { get; set; }
-        public string Name { get; set; }
-        public int ID_Employee { get; set; }
-        public string C__Pavilion { get; set; }
-        public string Status { get; set; }
-        public Nullable<System.DateTime> Rent_start { get; set; }
-        public Nullable<System.DateTime> Rent_end { get; set; }
-    
-        public virtual Employees Employees { get; set; }
-        public virtual Tenants Tenants { get; set; }
-        public virtual ICollection<Tenants> Tenants1 { get; set; }
+        public int id { get; set; }
+        public string status1 { get; set; }
     }
 }
