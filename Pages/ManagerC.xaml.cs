@@ -44,7 +44,7 @@ namespace Malina_Nizametdinova.Pages
                 try
                 {
                     //  Entities2.GetContext().SC.RemoveRange(SCForRemoving);
-                    Entities2.GetContext().SaveChanges();
+                    //Entities2.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
 
                     DataSC.ItemsSource = Entities2.GetContext().SC.ToList();

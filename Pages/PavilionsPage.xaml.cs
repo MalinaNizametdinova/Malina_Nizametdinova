@@ -24,6 +24,7 @@ namespace Malina_Nizametdinova.Pages
         {
             InitializeComponent();
             PavilionsList.ItemsSource = Entities2.GetContext().Pavilions.ToList();
+            Update();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -53,7 +54,7 @@ namespace Malina_Nizametdinova.Pages
                     try
                     {
                         //Entities2.GetContext().Pavilions.RemoveRange(PavForRemoving);
-                        Entities2.GetContext().SaveChanges();
+                       // Entities2.GetContext().SaveChanges();
                         MessageBox.Show("Данные успешно удалены!");
 
                         PavilionsList.ItemsSource = Entities2.GetContext().Pavilions.ToList();
@@ -68,6 +69,14 @@ namespace Malina_Nizametdinova.Pages
 
         private void ButtonEdit_Click_1(object sender, RoutedEventArgs e)
         {
+            var Re = Entities2.GetContext().Pavilions.ToList();
+            Re = Re.Where(x => x.Status.ToList);
+            if(Re == "Арендован" || Re == "Забронирован")
+            {
+                MessageBox.Show("Отмена");
+                return;
+            }
+
             using (var db = new Entities2())
             {
                 var paw = db.Pavilions
@@ -82,6 +91,35 @@ namespace Malina_Nizametdinova.Pages
                     NavigationService.Navigate(new Pages.AddPavilion((sender as Button).DataContext as Pavilions));
                 }
             }
+        }
+
+        private void Update()
+        {
+            var currentRe = Entities2.GetContext().Pavilions.ToList();
+
+
+            if (Stat.Text != null)
+            {
+                currentRe = currentRe.Where(x => x.Status.ToLower().Contains(Stat.Text.ToLower())).ToList();
+                PavilionsList.ItemsSource = currentRe.ToList();
+            }
+
+            if (Et.Text != null)
+            {
+                currentRe = currentRe.Where(x => x.Floor.ToLower().Contains(Et.Text.ToLower())).ToList();
+                PavilionsList.ItemsSource = currentRe.ToList();
+            }
+
+        }
+
+        private void Et_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void Stat_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
         }
     }
 }

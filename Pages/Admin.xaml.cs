@@ -24,6 +24,7 @@ namespace Malina_Nizametdinova.Pages
         {
             InitializeComponent();
             DataEmp.ItemsSource = Entities2.GetContext().Employees.ToList();
+            Update();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -41,10 +42,10 @@ namespace Malina_Nizametdinova.Pages
                 try
                 {
                     //  Entities2.GetContext().SC.RemoveRange(SCForRemoving);
-                    Entities2.GetContext().SaveChanges();
+                    //Entities2.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
 
-                    DataEmp.ItemsSource = Entities2.GetContext().SC.ToList();
+                    DataEmp.ItemsSource = Entities2.GetContext().Employees.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -57,7 +58,21 @@ namespace Malina_Nizametdinova.Pages
             NavigationService.Navigate(new Pages.AddEmp((sender as Button).DataContext as Employees));
         }
 
-        
-        
+        private void Update()
+        {
+            var currentRe = Entities2.GetContext().Employees.ToList();
+
+
+            if (Fam.Text != null)
+            {
+                currentRe = currentRe.Where(x => x.FIO.ToLower().Contains(Fam.Text.ToLower())).ToList();
+                DataEmp.ItemsSource = currentRe.ToList();
+            }
+        }
+
+            private void Fam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
     }
 }

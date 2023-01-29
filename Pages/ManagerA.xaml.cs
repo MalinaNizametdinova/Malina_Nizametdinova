@@ -24,6 +24,7 @@ namespace Malina_Nizametdinova.Pages
         {
             InitializeComponent();
             DataTen.ItemsSource = Entities2.GetContext().Tenants.ToList();
+            Update();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -41,7 +42,7 @@ namespace Malina_Nizametdinova.Pages
                 try
                 {
                     //  Entities2.GetContext().Tenants.RemoveRange(TenForRemoving);
-                    Entities2.GetContext().SaveChanges();
+                    //Entities2.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
 
                     DataTen.ItemsSource = Entities2.GetContext().Tenants.ToList();
@@ -56,5 +57,21 @@ namespace Malina_Nizametdinova.Pages
         {
             NavigationService.Navigate(new Pages.AddTen((sender as Button).DataContext as Tenants));
         }
+
+        private void Update()
+        {
+            var current = Entities2.GetContext().Tenants.ToList();
+            if (Nazv.Text != null)
+            {
+                current = current.Where(x => x.Name.ToLower().Contains(Nazv.Text.ToLower())).ToList();
+                DataTen.ItemsSource = current.ToList();
+            }
+        }
+
+        private void Nazv_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
+
     }
 }
