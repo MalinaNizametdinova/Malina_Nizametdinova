@@ -14,11 +14,6 @@ namespace Malina_Nizametdinova
     
     public partial class Rent
     {
-        public Rent()
-        {
-            this.Tenants1 = new HashSet<Tenants>();
-        }
-    
         public int ID { get; set; }
         public int ID_Tenant { get; set; }
         public string Name { get; set; }
@@ -30,6 +25,5 @@ namespace Malina_Nizametdinova
     
         public virtual Employees Employees { get; set; }
         public virtual Tenants Tenants { get; set; }
-        public virtual ICollection<Tenants> Tenants1 { get; set; }
     }
 }

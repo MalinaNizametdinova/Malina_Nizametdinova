@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище KingIT_MalinaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="ID" />
@@ -58,25 +58,6 @@
           <Property Name="Floors" Type="int" />
           <Property Name="Image" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "KingIT_Malina.dbo.Status" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="Status">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="status" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Tenants">
           <Key>
             <PropertyRef Name="ID" />
@@ -111,31 +92,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tenants_Rent">
-          <End Role="Rent" Type="Self.Rent" Multiplicity="1" />
-          <End Role="Tenants" Type="Self.Tenants" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rent">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Tenants">
-              <PropertyRef Name="ID Rent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Хранилище KingIT_MalinaModelContainer">
+        <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pavilions" EntityType="Self.Pavilions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rent" EntityType="Self.Rent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SC" EntityType="Self.SC" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tenants" EntityType="Self.Tenants" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Status" EntityType="Self.Status" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Status].[id] AS [id], 
-[Status].[status] AS [status]
-FROM [dbo].[Status] AS [Status]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Rent_Employees" Association="Self.FK_Rent_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Rent" EntitySet="Rent" />
@@ -144,15 +106,12 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tenants_Rent" Association="Self.FK_Tenants_Rent">
-            <End Role="Rent" EntitySet="Rent" />
-            <End Role="Tenants" EntitySet="Tenants" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="KingIT_MalinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="ID" />
@@ -194,7 +153,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <Property Name="Rent_end" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_Rent_Employees" FromRole="Rent" ToRole="Employees" />
           <NavigationProperty Name="Tenants" Relationship="Self.FK_Rent_Tenants" FromRole="Rent" ToRole="Tenants" />
-          <NavigationProperty Name="Tenants1" Relationship="Self.FK_Tenants_Rent" FromRole="Rent" ToRole="Tenants" />
         </EntityType>
         <EntityType Name="SC">
           <Key>
@@ -210,16 +168,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <Property Name="Floors" Type="Int32" />
           <Property Name="Image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Tenants">
           <Key>
             <PropertyRef Name="ID" />
@@ -230,7 +178,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <Property Name="Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Adress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rent" Relationship="Self.FK_Rent_Tenants" FromRole="Tenants" ToRole="Rent" />
-          <NavigationProperty Name="Rent1" Relationship="Self.FK_Tenants_Rent" FromRole="Tenants" ToRole="Rent" />
         </EntityType>
         <Association Name="FK_Rent_Employees">
           <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
@@ -256,24 +203,11 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tenants_Rent">
-          <End Role="Rent" Type="Self.Rent" Multiplicity="1" />
-          <End Role="Tenants" Type="Self.Tenants" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rent">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Tenants">
-              <PropertyRef Name="ID_Rent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="Pavilions" EntityType="Self.Pavilions" />
           <EntitySet Name="Rent" EntityType="Self.Rent" />
           <EntitySet Name="SC" EntityType="Self.SC" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tenants" EntityType="Self.Tenants" />
           <AssociationSet Name="FK_Rent_Employees" Association="Self.FK_Rent_Employees">
             <End Role="Employees" EntitySet="Employees" />
@@ -283,27 +217,15 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tenants_Rent" Association="Self.FK_Tenants_Rent">
-            <End Role="Rent" EntitySet="Rent" />
-            <End Role="Tenants" EntitySet="Tenants" />
-          </AssociationSet>
-          <EntitySet Name="Status" EntityType="KingIT_MalinaModel.Status" />
         </EntityContainer>
-        <EntityType Name="Status">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="status1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище KingIT_MalinaModelContainer" CdmEntityContainer="Entities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities2">
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.Employees">
+            <EntityTypeMapping TypeName="Model.Employees">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FIO" ColumnName="FIO" />
@@ -317,7 +239,7 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pavilions">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.Pavilions">
+            <EntityTypeMapping TypeName="Model.Pavilions">
               <MappingFragment StoreEntitySet="Pavilions">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -331,7 +253,7 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rent">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.Rent">
+            <EntityTypeMapping TypeName="Model.Rent">
               <MappingFragment StoreEntitySet="Rent">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_Tenant" ColumnName="ID Tenant" />
@@ -345,7 +267,7 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SC">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.SC">
+            <EntityTypeMapping TypeName="Model.SC">
               <MappingFragment StoreEntitySet="SC">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -359,33 +281,14 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tenants">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.Tenants">
+            <EntityTypeMapping TypeName="Model.Tenants">
               <MappingFragment StoreEntitySet="Tenants">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_Rent" ColumnName="ID Rent" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="KingIT_MalinaModel.Status">
-              <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="status1" ColumnName="status" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,6 +16,12 @@ namespace Malina_Nizametdinova
     public partial class Entities2 : DbContext
     {
         private static Entities2 _context;
+        public static Entities2 GetContext()
+        {
+            if (_context == null)
+                _context = new Entities2();
+            return _context;
+        }
         public Entities2()
             : base("name=Entities2")
         {
@@ -25,24 +31,11 @@ namespace Malina_Nizametdinova
         {
             throw new UnintentionalCodeFirstException();
         }
-        public static Entities2 GetContext()
-        {
-            if (_context == null)
-                _context = new Entities2();
-            return _context;
-        }
     
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Pavilions> Pavilions { get; set; }
         public DbSet<Rent> Rent { get; set; }
         public DbSet<SC> SC { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Tenants> Tenants { get; set; }
-        public DbSet<Status> Status { get; set; }
-
-        internal object Where(Func<object, bool> p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

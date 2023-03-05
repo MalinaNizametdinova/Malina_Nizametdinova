@@ -27,33 +27,31 @@ namespace Malina_Nizametdinova.Pages
         static int s = 0;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(Login.Text) || string.IsNullOrEmpty(Password.Password))
+            Auth(Login.Text, Password.Password);
+        }
+        public bool Auth(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Введите логин или пароль!!");
-                return;
+                MessageBox.Show("Введите данные");
+                return false;
             }
-
             using (var db = new Entities2())
             {
-                var user = db.Employees
-                    .AsNoTracking()
-                    .FirstOrDefault(u => u.Login.ToUpper() == Login.Text.ToUpper() && u.Password == Password.Password);
+                var user = db.Employees.AsNoTracking().FirstOrDefault(u => u.Login == login && u.Password == password);
                 if (user == null)
                 {
-                    s++;
-                    MessageBox.Show("Пользователь с такими данными не найден!");                    
-                    if (s >= 3)
-                    {
-                        Captcha capt = new Captcha();
-                        capt.Show();
-                    }
-                    return;
-                }            
-                
-           
+                    MessageBox.Show("Пользователь не найден");
+                    return false;
+                }
+                MessageBox.Show("Пользователь успешно найден");
+                Login.Clear();
+                Password.Clear();
 
-                MessageBox.Show("Пользователь успешно найден!");
-                    switch (user.Role)
+
+
+
+                switch (user.Role)
                 {
                     case "Администратор":
                         NavigationService?.Navigate(new Admin());
@@ -65,7 +63,9 @@ namespace Malina_Nizametdinova.Pages
                         NavigationService?.Navigate(new ManagerC());
                         break;
                 }
+                return true;
             }
         }
+        
     }
 }

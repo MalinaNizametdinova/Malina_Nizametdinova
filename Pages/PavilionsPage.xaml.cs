@@ -69,13 +69,13 @@ namespace Malina_Nizametdinova.Pages
 
         private void ButtonEdit_Click_1(object sender, RoutedEventArgs e)
         {
-            var Re = Entities2.GetContext().Pavilions.ToList();
-            Re = Re.Where(x => x.Status.ToList);
-            if(Re == "Арендован" || Re == "Забронирован")
-            {
-                MessageBox.Show("Отмена");
-                return;
-            }
+            //var Re = Entities2.GetContext().Pavilions.ToList();
+            //Re = Re.Where(x => x.Status.ToList);
+            //if(Re == "Арендован" || Re == "Забронирован")
+            //{
+            //    MessageBox.Show("Отмена");
+            //    return;
+            //}
 
             using (var db = new Entities2())
             {
@@ -104,11 +104,11 @@ namespace Malina_Nizametdinova.Pages
                 PavilionsList.ItemsSource = currentRe.ToList();
             }
 
-            if (Et.Text != null)
-            {
-                currentRe = currentRe.Where(x => x.Floor.ToLower().Contains(Et.Text.ToLower())).ToList();
-                PavilionsList.ItemsSource = currentRe.ToList();
-            }
+            //if (Et.Text != null)
+            //{
+            //    currentRe = currentRe.Where(x => x.Floor.ToLower().Contains(Et.Text.ToLower())).ToList();
+            //    PavilionsList.ItemsSource = currentRe.ToList();
+            //}
 
         }
 
